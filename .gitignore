@@ -1,0 +1,4 @@
+.terraform/
+sops	
+terraform.tfvars
+*.tfvars
