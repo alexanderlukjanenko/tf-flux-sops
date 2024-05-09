@@ -7,19 +7,19 @@ module "github_repository" {
   public_key_openssh_title = "flux0"
 }
 
+#module "gke_cluster" {
+#  source         = "github.com/alexanderlukjanenko/tf-google-gke-cluster"
+#  GOOGLE_REGION  = var.GOOGLE_REGION
+#  GOOGLE_PROJECT = var.GOOGLE_PROJECT
+#  GKE_NUM_NODES  = var.GKE_NUM_NODES
+#}
+
 module "gke_cluster" {
-  source         = "github.com/alexanderlukjanenko/tf-google-gke-cluster"
+  source         = "github.com/den-vasyliev/tf-google-gke-cluster"
   GOOGLE_REGION  = var.GOOGLE_REGION
   GOOGLE_PROJECT = var.GOOGLE_PROJECT
   GKE_NUM_NODES  = var.GKE_NUM_NODES
 }
-
-#module "gke_cluster" {
-#  source         = "github.com/den-vasyliev/tf-google-gke-cluster"
-#  GOOGLE_REGION  = var.GOOGLE_REGION
-#  GOOGLE_PROJECT = var.GOOGLE_PROJECT
-#  GKE_NUM_NODES  = 1
-#}
 
 module "tls_private_key" {
   source = "github.com/den-vasyliev/tf-hashicorp-tls-keys"
@@ -58,8 +58,8 @@ module "gke-workload-identity" {
 module "kms" {
   source             = "github.com/den-vasyliev/terraform-google-kms"
   project_id         = var.GOOGLE_PROJECT
-  keyring            = "sops-flux-t2"
+  keyring            = "sops-flux-t3"
   location           = "global"
-  keys               = ["sops-key-flux-t2"]
+  keys               = ["sops-key-flux-t3"]
   prevent_destroy    = false
 }
