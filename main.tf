@@ -7,18 +7,11 @@ module "github_repository" {
   public_key_openssh_title = "flux0"
 }
 
-#module "gke_cluster" {
-#  source         = "github.com/alexanderlukjanenko/tf-google-gke-cluster"
-#  GOOGLE_REGION  = var.GOOGLE_REGION
-#  GOOGLE_PROJECT = var.GOOGLE_PROJECT
-#  GKE_NUM_NODES  = var.GKE_NUM_NODES
-#}
-
 module "gke_cluster" {
-  source         = "github.com/den-vasyliev/tf-google-gke-cluster"
-  GOOGLE_REGION  = var.GOOGLE_REGION
-  GOOGLE_PROJECT = var.GOOGLE_PROJECT
-  GKE_NUM_NODES  = var.GKE_NUM_NODES
+ source         = "github.com/alexanderlukjanenko/tf-google-gke-cluster"
+ GOOGLE_REGION  = var.GOOGLE_REGION
+ GOOGLE_PROJECT = var.GOOGLE_PROJECT
+ GKE_NUM_NODES  = var.GKE_NUM_NODES
 }
 
 module "tls_private_key" {
@@ -55,11 +48,11 @@ terraform {
 #  roles               = ["roles/cloudkms.cryptoKeyEncrypterDecrypter"]
 #}
 
-module "kms" {
-  source             = "github.com/den-vasyliev/terraform-google-kms"
-  project_id         = var.GOOGLE_PROJECT
-  keyring            = "sops-flux-t3"
-  location           = "global"
-  keys               = ["sops-key-flux-t3"]
-  prevent_destroy    = false
-}
+# module "kms" {
+#   source             = "github.com/den-vasyliev/terraform-google-kms"
+#   project_id         = var.GOOGLE_PROJECT
+#   keyring            = "sops-flux-t3"
+#   location           = "global"
+#   keys               = ["sops-key-flux-t3"]
+#   prevent_destroy    = false
+# }
